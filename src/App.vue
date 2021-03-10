@@ -86,10 +86,10 @@ export default {
       this.filteredBuses = this.buses;
       this.streets = data.streets;
       this.filteredStreets = this.streets;
+      this.loading = false;
     } else {
       this.setInLocalStorage();
     }
-    this.loading = false;
   },
   methods: {
     getBuses: async function() {
@@ -121,6 +121,7 @@ export default {
       this.filteredBuses = this.buses;
       this.filteredStreets = this.streets;
       localStorage.data = JSON.stringify(data);
+      this.loading = false;
     },
     showBusByStreet(event) {
       this.showBusesByStreet = true;
