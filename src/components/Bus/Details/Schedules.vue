@@ -5,15 +5,16 @@
         {{ schedules[0].postoControle }}
       </h1>
       <div
-        v-for="(schedule, index) in schedules[0].horarios"
-        :key="'sg' + index"
-        class="schedulesBusView"
+        v-for="schedule in schedules[0].horarios"
+        :key="schedule.horario"
+        :class="
+          'schedulesBusView' +
+            (availableGoing == schedule.horario ? ' available' : '')
+        "
       >
         <p
           :class="
-            diffHour(schedule.horario)
-              ? 'scheduleView unavailable'
-              : 'scheduleView'
+            'scheduleView ' + getStatusSchedules('going', schedule.horario)
           "
         >
           {{ schedule.horario }}
@@ -31,15 +32,16 @@
         {{ schedules[1].postoControle }}
       </h1>
       <div
-        v-for="(schedule, index) in schedules[1].horarios"
-        :key="'sr' + index"
-        class="schedulesBusView"
+        v-for="schedule in schedules[1].horarios"
+        :key="schedule.horario"
+        :class="
+          'schedulesBusView' +
+            (availableReturn == schedule.horario ? ' available' : '')
+        "
       >
         <p
           :class="
-            diffHour(schedule.horario)
-              ? 'scheduleView unavailable'
-              : 'scheduleView'
+            'scheduleView ' + getStatusSchedules('return', schedule.horario)
           "
         >
           {{ schedule.horario }}
@@ -69,13 +71,44 @@ export default {
     schedules: Array,
     time: String,
   },
+  data() {
+    return {
+      indicationAvailableGoing: false,
+      indicationAvailableReturn: false,
+      availableGoing: "",
+      availableReturn: "",
+    };
+  },
   methods: {
-    diffHour: function(hour) {
-      if (hour === "00:00") return false;
+    getStatusSchedules: function(sense, hour) {
+      if (hour === "00:00") return true;
       var timeNow = parseInt(this.time.replace(":", ""));
       var schedule = parseInt(hour.replace(":", ""));
+      var timeResult = schedule < timeNow;
 
-      return schedule < timeNow;
+      this.available(sense, timeResult, hour);
+
+      return timeResult ? "unavailable" : "";
+    },
+    available: function(sense, timeResult, hour) {
+      if (
+        !timeResult &&
+        !this.indicationAvailableGoing &&
+        hour !== "00:00" &&
+        sense == "going"
+      ) {
+        this.indicationAvailableGoing = true;
+        this.availableGoing = hour;
+      }
+      if (
+        !timeResult &&
+        !this.indicationAvailableReturn &&
+        hour !== "00:00" &&
+        sense == "return"
+      ) {
+        this.indicationAvailableReturn = true;
+        this.availableReturn = hour;
+      }
     },
   },
 };
@@ -88,6 +121,8 @@ export default {
 }
 .schedulesBusView {
   display: inline-block;
+  width: 55px;
+  padding: 0px 5px;
 }
 .schedulesBus h1 {
   width: 99%;
@@ -99,6 +134,12 @@ p.scheduleView {
   display: inline-block;
   margin: 0px 5px;
   font-size: 12px;
+  text-align: left;
+}
+.available {
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 20px;
 }
 p.unavailable {
   text-decoration: line-through;

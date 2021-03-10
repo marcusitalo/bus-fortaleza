@@ -45,7 +45,11 @@ export default {
             ? this.streets
             : this.streets.filter(
                 (street) =>
-                  street.nome.toUpperCase().indexOf(search.toUpperCase()) != -1
+                  (
+                    street.tipo.toUpperCase().trim() +
+                    " " +
+                    street.nome.toUpperCase().trim()
+                  ).indexOf(search.toUpperCase().trim()) != -1
               );
         this.$emit("applyFilterStreet", { filteredStreets: filteredStreets });
       }, 800);
