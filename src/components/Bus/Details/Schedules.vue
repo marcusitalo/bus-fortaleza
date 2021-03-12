@@ -79,6 +79,12 @@ export default {
       availableReturn: "",
     };
   },
+  created() {
+    this.indicationAvailableGoing = false;
+    this.indicationAvailableReturn = false;
+    this.availableGoing = "";
+    this.availableReturn = "";
+  },
   methods: {
     getStatusSchedules: function(sense, hour) {
       if (hour === "00:00") return true;
