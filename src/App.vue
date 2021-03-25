@@ -149,6 +149,8 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 html {
   margin: 0px auto;
   padding: 0px auto;
@@ -158,6 +160,7 @@ html {
   width: 99vw;
   height: 100vh;
   background-position: bottom right;
+  font-family: "Open Sans";
 }
 #app {
   text-align: left;
@@ -185,7 +188,7 @@ img.loading {
 .listsCards {
   height: 70vh;
   overflow: auto;
-  width: 400px;
+  width: 450px;
 }
 ::-webkit-scrollbar {
   width: 7px;

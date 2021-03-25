@@ -1,58 +1,26 @@
 <template>
-  <div v-if="schedules" class="schedulesBus">
-    <div v-if="schedules[0] && schedules[1]" class="goingReturnBus">
+  <div v-if="schedules.length" class="schedulesBus">
+    <div v-for="schedule, index in schedules" :key="schedule.postoControle" :class="'goingReturnBus '+ (index === 0 ? 'going':'return')">
       <h1>
-        {{ schedules[0].postoControle }}
+        {{ schedule.postoControle }}
       </h1>
       <div
-        v-for="schedule in schedules[0].horarios"
-        :key="schedule.horario"
-        :class="
-          'schedulesBusView' +
-            (availableGoing == schedule.horario ? ' available' : '')
-        "
+        v-for="time,key in schedule.horarios"
+        :key="'b'+key+index"
+        :class="'schedulesBusView '+ getStatusSchedules(time.horario,index)"
       >
         <p
-          :class="
-            'scheduleView ' + getStatusSchedules('going', schedule.horario)
-          "
+          class="scheduleView"
         >
-          {{ schedule.horario }}
+          {{ time.horario }}
         </p>
         <img
           src="../../../assets/icons/acessibilidade.png"
           title="Possui acessibilidade"
           class="accessibility"
-          v-if="schedule.acessivel == 'sim'"
+          v-if="time.acessivel == 'sim'"
         />
-      </div>
-    </div>
-    <div v-if="schedules[0] && schedules[1]" class="goingReturnBus">
-      <h1>
-        {{ schedules[1].postoControle }}
-      </h1>
-      <div
-        v-for="schedule in schedules[1].horarios"
-        :key="schedule.horario"
-        :class="
-          'schedulesBusView' +
-            (availableReturn == schedule.horario ? ' available' : '')
-        "
-      >
-        <p
-          :class="
-            'scheduleView ' + getStatusSchedules('return', schedule.horario)
-          "
-        >
-          {{ schedule.horario }}
-        </p>
-        <img
-          src="../../../assets/icons/acessibilidade.png"
-          title="Possui acessibilidade"
-          class="accessibility"
-          v-if="schedule.acessivel == 'sim'"
-        />
-      </div>
+      </div> 
     </div>
     <div v-if="!(schedules[0] && schedules[1])">
       <h1>Não foi possível localizar os horários disponíveis.</h1>
@@ -69,59 +37,33 @@ export default {
   name: "Schedules",
   props: {
     schedules: Array,
-    time: String,
-  },
-  data() {
-    return {
-      indicationAvailableGoing: false,
-      indicationAvailableReturn: false,
-      availableGoing: "",
-      availableReturn: "",
-    };
-  },
-  created() {
-    this.indicationAvailableGoing = false;
-    this.indicationAvailableReturn = false;
-    this.availableGoing = "";
-    this.availableReturn = "";
+    time: String
   },
   methods: {
-    getStatusSchedules: function(sense, hour) {
-      if (hour === "00:00") return true;
+    getStatusSchedules: function(hour,sense) {
+      if (hour === "00:00") return "";
+
       var timeNow = parseInt(this.time.replace(":", ""));
       var schedule = parseInt(hour.replace(":", ""));
       var timeResult = schedule < timeNow;
 
-      this.available(sense, timeResult, hour);
-
+      if((this.schedules.going == "" && !timeResult && sense == 0)){
+          this.schedules.going = hour 
+          return ' available'
+      }
+      if((this.schedules.return == "" && !timeResult && sense == 1)){
+          this.schedules.return = hour 
+          return ' available'
+      }
+      
       return timeResult ? "unavailable" : "";
-    },
-    available: function(sense, timeResult, hour) {
-      if (
-        !timeResult &&
-        !this.indicationAvailableGoing &&
-        hour !== "00:00" &&
-        sense == "going"
-      ) {
-        this.indicationAvailableGoing = true;
-        this.availableGoing = hour;
-      }
-      if (
-        !timeResult &&
-        !this.indicationAvailableReturn &&
-        hour !== "00:00" &&
-        sense == "return"
-      ) {
-        this.indicationAvailableReturn = true;
-        this.availableReturn = hour;
-      }
-    },
+    }      
   },
 };
 </script>
-<style scoped>
+<style>
 .schedulesBus {
-  width: 30vw;
+  width: 28vw;
   display: inline-block;
   vertical-align: top;
 }
@@ -136,7 +78,7 @@ export default {
   color: var(--secondary);
   border-bottom: 1px solid var(--secondary);
 }
-p.scheduleView {
+.scheduleView {
   display: inline-block;
   margin: 0px 5px;
   font-size: 12px;
@@ -146,8 +88,8 @@ p.scheduleView {
   background-color: var(--primary);
   color: var(--white);
   border-radius: 20px;
-}
-p.unavailable {
+} 
+.unavailable p{
   text-decoration: line-through;
   color: #333333;
   opacity: 0.5;
@@ -162,7 +104,7 @@ p.unavailable {
 @media screen and (max-width: 576px) {
   .schedulesBus {
     width: 85%;
-    padding: 8%;
+    padding: 7%;
     margin-bottom: 100px;
   }
 }

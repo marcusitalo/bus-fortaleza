@@ -3,15 +3,15 @@
     <div>
       <div class="headerDetails">
         <h1>{{ nameFullBus }}</h1>
-        <span>{{ this.dateNow + " " + this.timeNow }}</span>
+        <span>{{ dateNow + " " + timeNow }}</span>
       </div>
       <span class="closeDetails" @click="closeDetails()"
         ><img src="../../assets/images/close.png"
       /></span>
     </div>
     <div>
-      <Itinerary :itineraries="this.itinerary" />
-      <Schedules :schedules="this.schedules" :time="this.timeNow" />
+      <Itinerary :itineraries="itinerary" />
+      <Schedules :schedules="schedules" :time="timeNow" />
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       itinerary: {},
       schedules: [],
       dateNow: "",
-      timeNow: "",
+      timeNow: ""
     };
   },
   created() {
@@ -63,6 +63,10 @@ export default {
       } else {
         this.setInLocalStorage();
       }
+
+      this.schedules['going'] = ""
+      this.schedules['return'] = ""
+
       var date = new Date();
       this.getDateNow(date);
       this.getTimeNow(date);
@@ -80,7 +84,7 @@ export default {
       return this.dateNow;
     },
     getTimeNow(date) {
-      this.timeNow =
+      this.timeNow = 
         ("0" + date.getHours()).slice(-2) +
         ":" +
         ("0" + date.getMinutes()).slice(-2);
@@ -179,6 +183,8 @@ span.closeDetails img {
 .headerDetails h1 {
   font-size: 35px;
   margin: 0px;
+  letter-spacing: 5px;
+  word-break: break-word;
 }
 .headerDetails span {
   font-size: 12px;

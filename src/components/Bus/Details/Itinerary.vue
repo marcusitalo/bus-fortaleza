@@ -33,7 +33,7 @@ export default {
 <style scoped>
 .itineraryBus {
   display: inline-block;
-  width: 50vw;
+  width: 60vw;
   padding: 10px;
 }
 .goingBus,
@@ -45,7 +45,7 @@ export default {
 p.itineraryView {
   margin: 0px;
   padding: 5px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .itineraryBusView {
   position: relative;
@@ -81,7 +81,7 @@ p.itineraryView::after {
 @media screen and (max-width: 576px) {
   .itineraryBus {
     width: 85%;
-    padding: 8%;
+    padding: 7%;
   }
 }
 </style>

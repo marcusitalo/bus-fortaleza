@@ -97,4 +97,13 @@ span.streetNumber {
   color: var(--secondary);
   padding: 5px;
 }
+@media screen and (max-width: 576px) {
+  .cardStreet {
+    font-size: 12px;
+    padding: 7px 30px;
+    font-weight: bolder;
+    background-position: center left;
+    margin: 5px 5px;
+  }
+}
 </style>

@@ -41,7 +41,7 @@ export default {
   align-items: center;
   height: 4vh;
   margin: 5px 2px;
-  padding: 2px 30px;
+  padding: 3px 35px;
   box-shadow: 0px 0px 1px 1px;
   cursor: pointer;
   background-image: url("../../assets/images/bus-stop.png");
@@ -61,5 +61,14 @@ span.busNumber {
   background: var(--secondary);
   border-radius: 10px;
   height: 200px;
+}
+@media screen and (max-width: 576px) {
+  .cardBus {
+    font-size: 12px;
+    padding: 7px 30px;
+    font-weight: bolder;
+    background-position: center left;
+    margin: 5px 5px;
+  }
 }
 </style>

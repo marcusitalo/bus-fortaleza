@@ -5,7 +5,9 @@
         type="text"
         name=""
         id="searchBar"
-        placeholder="Pesquisar por Logradouro."
+        placeholder="Pesquisar por logradouro." 
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Pesquisar por logradouro.'" 
         v-model="search"
         class="searchBar"
         @keyup="debounce"
@@ -65,7 +67,7 @@ export default {
 <style scoped>
 .searchBar {
   margin: 0px 10px;
-  width: 300px;
+  width: 285px;
   border: 0px;
   padding: 5px;
   border: 1px solid var(--primary);
