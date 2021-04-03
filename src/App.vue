@@ -149,8 +149,14 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@300&family=Heebo:wght@300;400&display=swap");
 
+* {
+  font-family: "Archivo";
+}
+*:focus {
+  outline: none;
+}
 html {
   margin: 0px auto;
   padding: 0px auto;
@@ -160,20 +166,21 @@ html {
   width: 99vw;
   height: 100vh;
   background-position: bottom right;
-  font-family: "Open Sans";
 }
 #app {
   text-align: left;
   color: var(--primary);
 }
 .changeSearch {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--secondary);
   margin: 0px 10px;
   display: flex;
   text-decoration: underline;
   cursor: pointer;
   padding: 3px 5px;
+  font-weight: bold;
+  font-family: "Heebo";
 }
 .viewsInformations {
   display: flex;

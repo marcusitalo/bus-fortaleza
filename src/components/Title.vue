@@ -18,14 +18,19 @@ h2 {
   color: var(--primary);
   margin: 0px 8px;
 }
+h2::first-letter {
+  color: #e96c6d;
+  font-size: 35px;
+}
 span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--secondary);
-  font-family: system-ui;
+  font-family: "Heebo";
   margin: 0px 8px;
   border-bottom: 1px solid;
   width: 95%;
   display: block;
   margin-bottom: 10px;
+  font-weight: bolder;
 }
 </style>

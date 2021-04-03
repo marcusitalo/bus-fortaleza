@@ -1,17 +1,19 @@
 <template>
   <div v-if="schedules.length" class="schedulesBus">
-    <div v-for="schedule, index in schedules" :key="schedule.postoControle" :class="'goingReturnBus '+ (index === 0 ? 'going':'return')">
+    <div
+      v-for="(schedule, index) in schedules"
+      :key="schedule.postoControle"
+      :class="'goingReturnBus ' + (index === 0 ? 'going' : 'return')"
+    >
       <h1>
         {{ schedule.postoControle }}
       </h1>
       <div
-        v-for="time,key in schedule.horarios"
-        :key="'b'+key+index"
-        :class="'schedulesBusView '+ getStatusSchedules(time.horario,index)"
+        v-for="(time, key) in schedule.horarios"
+        :key="'b' + key + index"
+        :class="'schedulesBusView ' + getStatusSchedules(time.horario, index)"
       >
-        <p
-          class="scheduleView"
-        >
+        <p class="scheduleView">
           {{ time.horario }}
         </p>
         <img
@@ -20,7 +22,7 @@
           class="accessibility"
           v-if="time.acessivel == 'sim'"
         />
-      </div> 
+      </div>
     </div>
     <div v-if="!(schedules[0] && schedules[1])">
       <h1>Não foi possível localizar os horários disponíveis.</h1>
@@ -37,27 +39,27 @@ export default {
   name: "Schedules",
   props: {
     schedules: Array,
-    time: String
+    time: String,
   },
   methods: {
-    getStatusSchedules: function(hour,sense) {
+    getStatusSchedules: function(hour, sense) {
       if (hour === "00:00") return "";
 
       var timeNow = parseInt(this.time.replace(":", ""));
       var schedule = parseInt(hour.replace(":", ""));
       var timeResult = schedule < timeNow;
 
-      if((this.schedules.going == "" && !timeResult && sense == 0)){
-          this.schedules.going = hour 
-          return ' available'
+      if (this.schedules.going == "" && !timeResult && sense == 0) {
+        this.schedules.going = hour;
+        return " available";
       }
-      if((this.schedules.return == "" && !timeResult && sense == 1)){
-          this.schedules.return = hour 
-          return ' available'
+      if (this.schedules.return == "" && !timeResult && sense == 1) {
+        this.schedules.return = hour;
+        return " available";
       }
-      
+
       return timeResult ? "unavailable" : "";
-    }      
+    },
   },
 };
 </script>
@@ -83,13 +85,15 @@ export default {
   margin: 0px 5px;
   font-size: 12px;
   text-align: left;
+  font-family: "Heebo";
+  font-weight: bolder;
 }
 .available {
   background-color: var(--primary);
   color: var(--white);
   border-radius: 20px;
-} 
-.unavailable p{
+}
+.unavailable p {
   text-decoration: line-through;
   color: #333333;
   opacity: 0.5;

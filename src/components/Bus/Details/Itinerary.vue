@@ -46,6 +46,8 @@ p.itineraryView {
   margin: 0px;
   padding: 5px;
   font-size: 13px;
+  font-family: "Heebo";
+  font-weight: bolder;
 }
 .itineraryBusView {
   position: relative;

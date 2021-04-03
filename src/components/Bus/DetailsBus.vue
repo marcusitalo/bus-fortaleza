@@ -40,7 +40,7 @@ export default {
       itinerary: {},
       schedules: [],
       dateNow: "",
-      timeNow: ""
+      timeNow: "",
     };
   },
   created() {
@@ -64,8 +64,8 @@ export default {
         this.setInLocalStorage();
       }
 
-      this.schedules['going'] = ""
-      this.schedules['return'] = ""
+      this.schedules["going"] = "";
+      this.schedules["return"] = "";
 
       var date = new Date();
       this.getDateNow(date);
@@ -84,7 +84,7 @@ export default {
       return this.dateNow;
     },
     getTimeNow(date) {
-      this.timeNow = 
+      this.timeNow =
         ("0" + date.getHours()).slice(-2) +
         ":" +
         ("0" + date.getMinutes()).slice(-2);
@@ -159,11 +159,11 @@ span.closeDetails img {
   width: 30px;
 }
 .viewDetails {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0px;
   padding: 0px;
-  position: absolute;
+  position: fixed;
   background-color: var(--white);
   top: 0px;
   left: 0px;
@@ -183,11 +183,12 @@ span.closeDetails img {
 .headerDetails h1 {
   font-size: 35px;
   margin: 0px;
-  letter-spacing: 5px;
+  letter-spacing: 1px;
   word-break: break-word;
 }
 .headerDetails span {
   font-size: 12px;
+  letter-spacing: 2px;
 }
 @media screen and (max-width: 576px) {
   .viewDetails {

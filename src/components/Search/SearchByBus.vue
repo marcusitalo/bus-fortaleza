@@ -5,9 +5,9 @@
         type="text"
         name=""
         id="searchBar"
-        placeholder="Pesquisar seu ônibus." 
+        placeholder="Pesquisar seu ônibus."
         onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Pesquisar seu ônibus.'" 
+        onblur="this.placeholder = 'Pesquisar seu ônibus.'"
         v-model="search"
         class="searchBar"
         @keyup="debounce"
@@ -66,10 +66,8 @@ export default {
   width: 285px;
   border: 0px;
   padding: 5px;
-  border: 1px solid var(--primary);
-  text-align: center;
-  border-radius: 20px;
-  font-family: monospace;
+  border-bottom: 1px solid var(--primary);
+  font-family: "Archivo";
   color: var(--primary);
   font-weight: 600;
   padding-right: 28px;
@@ -82,17 +80,14 @@ export default {
 }
 .btn-clean {
   position: absolute;
-  margin: 1px -39px;
-  font-family: cursive;
+  margin: 1px -32px;
+  font-family: "Heebo";
   font-size: 15px;
-  font-weight: bold;
-  color: var(--white);
+  font-weight: bolder;
+  color: var(--secondary);
   cursor: pointer;
-  background-color: var(--secondary);
   width: 28px;
   height: 25px;
-  border-top-right-radius: 20px;
   text-align: center;
-  border-bottom-right-radius: 20px;
 }
 </style>

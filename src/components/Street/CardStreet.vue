@@ -88,7 +88,7 @@ export default {
   padding: 2px 25px;
   background-size: 6%;
   background-repeat: no-repeat;
-  background-position: 5px 2px;
+  background-position: 3px 2px;
 }
 .cardStreet.selectedStreet {
   background-color: var(--ligthgray);
@@ -96,6 +96,8 @@ export default {
 span.streetNumber {
   color: var(--secondary);
   padding: 5px;
+  font-weight: bold;
+  font-family: "Heebo";
 }
 @media screen and (max-width: 576px) {
   .cardStreet {

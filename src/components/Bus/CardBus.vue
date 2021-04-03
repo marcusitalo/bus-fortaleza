@@ -45,12 +45,15 @@ export default {
   box-shadow: 0px 0px 1px 1px;
   cursor: pointer;
   background-image: url("../../assets/images/bus-stop.png");
-  background-size: 9%;
+  background-size: 7%;
   background-repeat: no-repeat;
+  background-position: 5px center;
 }
 span.busNumber {
   color: var(--secondary);
   padding: 5px;
+  font-weight: bold;
+  font-family: "Heebo";
 }
 .viewBus::-webkit-scrollbar {
   width: 7px;
